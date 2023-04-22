@@ -10,7 +10,7 @@
                         <img class="svg signupBottom" src="img/svg/signupbottom.svg" alt="img" />
                     </div>
                     <div class="signUP-admin-left__content">
-                        <div class="text-capitalize mb-md-30 mb-15 d-flex align-items-center justify-content-md-start justify-content-center">
+                        <div class="text-capitalize mb-md-30 mb-5 d-flex align-items-center justify-content-md-start justify-content-center">
                             <a class="wh-36 bg-primary text-white radius-md mr-10 content-center" href="index.html">a</a>
                             <span class="text-dark">Afya Plug</span>
                         </div>
@@ -22,7 +22,7 @@
                 </div>
             </div>
             <div class="col-xl-8 col-lg-7 col-md-7 col-sm-8">
-                <div class="signUp-admin-right  p-md-40 p-10">
+                <div class="signUp-admin-right  p-md-40 p-5">
                     <div class="signUp-topbar d-flex align-items-center justify-content-md-end justify-content-center mt-md-0 mb-md-0 mt-20 mb-1">
                         <p class="mb-0">
                             Already have an account?
@@ -33,9 +33,9 @@
                     </div>
                     <div class="row justify-content-center">
                         <div class="col-xl-9 col-lg-10 col-md-12 ">
-                            <div class="edit-profile mt-md-25 mt-0">
+                            <div class="edit-profile mt-0">
                                 <div class="card border-0">
-                                    <div class="card-header border-0  pb-md-15 pb-10 pt-md-20 pt-10 ">
+                                    <div class="card-header border-0  pt-md-20 ">
                                         <div class="edit-profile__title">
                                             <h6>Sign up to <span class="color-primary">Afya Plug</span></h6>
                                         </div>
@@ -44,17 +44,13 @@
                                         <div class="edit-profile__body">                                            
                                             <form method="POST" action="{{ route('register') }}">
                                                 @csrf
-                                                <div class="form-group mb-20">
+                                                <div class="form-group mb-30">
                                                     <label for="name">name</label>
                                                     <input type="text" class="form-control" name="name" placeholder="Full Name">
                                                 </div>                                           
-                                                <div class="form-group mb-20">
+                                                <div class="form-group mb-30">
                                                     <label for="email">Email Address</label>
                                                     <input type="text" class="form-control" name="email" placeholder="name@example.com">
-                                                </div>
-                                                <div class="form-group mb-20">
-                                                    <label for="email">Phone number</label>
-                                                    <input type="text" class="form-control" name="phone" placeholder="0701234567">
                                                 </div>
                                                 <div class="form-group mb-15">
                                                     <label for="password-field">password</label>
@@ -76,8 +72,8 @@
                                                     </button>
                                                 </div>                                            
                                             </form>
-                                            <p class="social-connector text-center mb-md-25 mb-15  mt-md-30 mt-20 "><span>Or</span></p>
-                                            <div class="w-100 button-group d-flex align-items-center justify-content-md-start justify-content-center">
+                                            <p class="social-connector text-center mb-md-25 mb-15  mt-md-30"><span>Or</span></p>
+                                            <div class="w-100 button-group d-flex align-items-center justify-content-center">
                                                 <ul class="signUp-socialBtn">
                                                     <li>
                                                         <button class="radius-md wh-48 content-center"><img class="svg" src="img/svg/google.svg" alt="img" /> </button>
@@ -94,7 +90,6 @@
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>

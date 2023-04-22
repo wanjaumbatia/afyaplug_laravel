@@ -15,6 +15,18 @@ return new class extends Migration
     {
         Schema::create('email_messages', function (Blueprint $table) {
             $table->id();
+            $table->string('to');
+            $table->string('subject');
+            $table->string('message');
+            $table->string('attachment')->nullable();
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->boolean('sent')->default(false);
+            $table->dateTime('sent_on')->nullable();
+            $table->string('reference')->nullable();
+            // order
+            // $table->unsignedBigInteger('order_id')->nullable();
+            // $table->foreign('order_id')->references('id')->on('orders');
             $table->timestamps();
         });
     }

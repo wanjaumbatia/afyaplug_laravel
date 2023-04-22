@@ -45,6 +45,8 @@
     <link rel="stylesheet" href="{{asset('assets/vendor_assets/css/wickedpicker.min.css')}}">
 
     <link rel="stylesheet" href="{{asset('style.css')}}">
+    
+    <link rel="icon" type="image/png" sizes="16x16" href="{{asset('img/favicon-img.png')}}">
 </head>
 <body class="layout-light side-menu overlayScroll">
     <div class="mobile-search">
@@ -60,7 +62,7 @@
             <div class="navbar-left">
                 <a href="" class="sidebar-toggle">
                     <img class="svg" src="{{asset('img/svg/bars.svg')}}" alt="img"></a>
-                <a class="navbar-brand" href="#"><img class="dark" src="{{asset('img/logo_dark.png')}}" alt="svg"><img class="light" src="{{asset('img/logo_white.png')}}" alt="img"></a>
+                <a class="navbar-brand" href="#"><img class="dark" src="{{asset('img/logo_text.png')}}" alt="svg"><img class="light" src="{{asset('img/logo_text.png')}}" alt="img"></a>
                 <form action="/" class="search-form">
                     <span data-feather="search"></span>
                     <input class="form-control mr-sm-2 box-shadow-none" type="text" placeholder="Search...">
@@ -176,80 +178,27 @@
                             <a href="javascript:;" class="nav-item-toggle">
                                 <span data-feather="bell"></span></a>
                             <div class="dropdown-wrapper">
-                                <h2 class="dropdown-wrapper__title">Notifications <span class="badge-circle badge-warning ml-1">4</span></h2>
+                                <h2 class="dropdown-wrapper__title">Notifications <span class="badge-circle badge-warning ml-1">{{count(Auth::user()->unreadNotifications)}}</span></h2>
                                 <ul>
+                                    @foreach(Auth::user()->unreadNotifications as $item)
+                                    @if ($item->data['type'] == 'new_user')
                                     <li class="nav-notification__single nav-notification__single--unread d-flex flex-wrap">
                                         <div class="nav-notification__type nav-notification__type--primary">
-                                            <span data-feather="inbox"></span>
+                                            <span data-feather="{{$item->data['icon']}}"></span>
                                         </div>
                                         <div class="nav-notification__details">
+                                            <a href="{{route('users.markNotification', $item->id)}}">
+                                                <a href="{{route('users.markNotification', $item->id)}}" class="subject stretched-link text-truncate" style="max-width: 180px;">{{$item->data['name']}}</a>
+                                                <span>has created an account.</span>
+                                            </a>
                                             <p>
-                                                <a href="" class="subject stretched-link text-truncate" style="max-width: 180px;">James</a>
-                                                <span>sent you a message</span>
-                                            </p>
-                                            <p>
-                                                <span class="time-posted">5 hours ago</span>
+                                                <span class="time-posted">{{$item->created_at}}</span>
                                             </p>
                                         </div>
                                     </li>
-                                    <li class="nav-notification__single nav-notification__single--unread d-flex flex-wrap">
-                                        <div class="nav-notification__type nav-notification__type--secondary">
-                                            <span data-feather="upload"></span>
-                                        </div>
-                                        <div class="nav-notification__details">
-                                            <p>
-                                                <a href="" class="subject stretched-link text-truncate" style="max-width: 180px;">James</a>
-                                                <span>sent you a message</span>
-                                            </p>
-                                            <p>
-                                                <span class="time-posted">5 hours ago</span>
-                                            </p>
-                                        </div>
-                                    </li>
-                                    <li class="nav-notification__single nav-notification__single--unread d-flex flex-wrap">
-                                        <div class="nav-notification__type nav-notification__type--success">
-                                            <span data-feather="log-in"></span>
-                                        </div>
-                                        <div class="nav-notification__details">
-                                            <p>
-                                                <a href="" class="subject stretched-link text-truncate" style="max-width: 180px;">James</a>
-                                                <span>sent you a message</span>
-                                            </p>
-                                            <p>
-                                                <span class="time-posted">5 hours ago</span>
-                                            </p>
-                                        </div>
-                                    </li>
-                                    <li class="nav-notification__single nav-notification__single d-flex flex-wrap">
-                                        <div class="nav-notification__type nav-notification__type--info">
-                                            <span data-feather="at-sign"></span>
-                                        </div>
-                                        <div class="nav-notification__details">
-                                            <p>
-                                                <a href="" class="subject stretched-link text-truncate" style="max-width: 180px;">James</a>
-                                                <span>sent you a message</span>
-                                            </p>
-                                            <p>
-                                                <span class="time-posted">5 hours ago</span>
-                                            </p>
-                                        </div>
-                                    </li>
-                                    <li class="nav-notification__single nav-notification__single d-flex flex-wrap">
-                                        <div class="nav-notification__type nav-notification__type--danger">
-                                            <span data-feather="heart"></span>
-                                        </div>
-                                        <div class="nav-notification__details">
-                                            <p>
-                                                <a href="" class="subject stretched-link text-truncate" style="max-width: 180px;">James</a>
-                                                <span>sent you a message</span>
-                                            </p>
-                                            <p>
-                                                <span class="time-posted">5 hours ago</span>
-                                            </p>
-                                        </div>
-                                    </li>
+                                    @endif
+                                    @endforeach
                                 </ul>
-                                <a href="" class="dropdown-wrapper__more">See all incoming activity</a>
                             </div>
                         </div>
                     </li>
@@ -260,7 +209,7 @@
                             <div class="dropdown-wrapper">
                                 <div class="nav-author__info">
                                     <div class="author-img">
-                                        <img src="{{ asset('img/author-nav.jpg')}}" alt="" class="rounded-circle">
+                                        <img src="{{asset('storage/users-avatar/'. Auth::user()->avatar)}}" alt="" class="rounded-circle">
                                     </div>
                                     <div>
                                         <h6>{{ Auth::user()->name }}</h6>
@@ -270,7 +219,7 @@
                                 <div class="nav-author__options">
                                     <ul>
                                         <li>
-                                            <a href="">
+                                            <a href="{{route('users.profile')}}">
                                                 <span data-feather="user"></span> Profile</a>
                                         </li>
                                         <li>
@@ -326,10 +275,51 @@
                             <span>Main menu</span>
                         </li>
                         <li>
+                            <a href="{{route('users.profile')}}" class="">
+                                <span data-feather="user" class="nav-icon"></span>
+                                <span class="menu-text">My Profile</span>
+                            </a>
+                        </li>
+                        <li>
                             <a href="/chatify" class="">
                                 <span data-feather="message-square" class="nav-icon"></span>
                                 <span class="menu-text">Chat</span>
                             </a>
+                        </li>
+                        <li class="has-child">
+                            <a href="#">
+                                <span data-feather="dollar-sign" class="nav-icon"></span>
+                                <span class="menu-text">Accounting</span>
+                                <span class="toggle-icon"></span>
+                            </a>
+                            <ul>
+                                <li>
+                                    <a href="">Bank Accounts</a>
+                                </li>
+                                <li>
+                                    <a class="" href="{{route('accounting.accounts')}}">Accounts (COA)</a>
+                                </li>                        
+                                <li class="has-child">
+                                    <a href="#">
+                                        <span class="menu-text">Setup</span>
+                                        <span class="toggle-icon"></span>
+                                    </a>
+                                    <ul>        
+                                        <li>
+                                            <a class="" href="{{route('accounting.settings.currency')}}">Currencies</a>
+                                        </li>
+                                        <li>
+                                            <a class="" href="{{route('accounting.settings.vat')}}">VAT Rates</a>
+                                        </li>
+                                        <li class="">
+                                            <a class="" href="{{route('accounting.settings.period')}}">Accounting Periods</a>
+                                        </li>    
+                                        <li>
+                                            <a class="" href="{{route('accounting.settings.categories')}}">Account Categories</a>
+                                        </li>                            
+                                    </ul>
+                                </li>
+                            </ul>
                         </li>
                         <li class="has-child">
                             <a href="#" class="">
@@ -349,7 +339,19 @@
                         <li class="has-child">
                             <a href="#" class="">
                                 <span data-feather="users" class="nav-icon"></span>
-                                <span class="menu-text">User Management</span>
+                                <span class="menu-text">Staff Management</span>
+                                <span class="toggle-icon"></span>
+                            </a>
+                            <ul>
+                                <li>
+                                    <a class="" href="{{route('users.staff.open')}}">Open Requests</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="has-child">
+                            <a href="#" class="">
+                                <span data-feather="lock" class="nav-icon"></span>
+                                <span class="menu-text">Identity Management</span>
                                 <span class="toggle-icon"></span>
                             </a>
                             <ul>
@@ -411,12 +413,19 @@
     </main>
     <div id="overlayer">
         <span class="loader-overlay">
-            <div class="atbd-spin-dots spin-lg">
-                <span class="spin-dot badge-dot dot-primary"></span>
-                <span class="spin-dot badge-dot dot-primary"></span>
-                <span class="spin-dot badge-dot dot-primary"></span>
-                <span class="spin-dot badge-dot dot-primary"></span>
-            </div>
+            <div class="row">
+                <div class="col-12 text-center">
+                    <img src="{{asset('img/app_logo.png')}}" alt="" srcset="">
+                </div>
+                <div class="col-12 mt-2 text-center">
+                    <div class="atbd-spin-dots spin-lg">
+                        <span class="spin-dot badge-dot dot-primary"></span>
+                        <span class="spin-dot badge-dot dot-primary"></span>
+                        <span class="spin-dot badge-dot dot-primary"></span>
+                        <span class="spin-dot badge-dot dot-primary"></span>
+                    </div>
+                </div>
+            </div>       
         </span>
     </div>
     
@@ -468,5 +477,6 @@
     <script src="{{asset('assets/theme_assets/js/jvectormap-init.js')}}"></script>
     <script src="{{asset('assets/theme_assets/js/leaflet-init.js')}}"></script>
     <script src="{{asset('assets/theme_assets/js/main.js')}}"></script>
+
 </body>
 </html>

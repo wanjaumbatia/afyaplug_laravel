@@ -81,10 +81,12 @@
                             </th>
                             <th>
                                 <span class="userDatatable-title">role</span>
-                            </th>
-                            
+                            </th>                            
                             <th>
-                                <span class="userDatatable-title">Provider</span>
+                                <span class="userDatatable-title">Last login</span>
+                            </th>                            
+                            <th>
+                                <span class="userDatatable-title">Last Ip Address</span>
                             </th>
                             <th class="text-center">
                                 <span class="userDatatable-title">join date</span>
@@ -94,9 +96,6 @@
                             </th>
                             <th class="text-center">
                                 <span class="userDatatable-title">Change Status</span>
-                            </th>
-                            <th>
-                                <span class="userDatatable-title float-right"></span>
                             </th>
                         </tr>
                     </thead>
@@ -127,7 +126,18 @@
                         </td>                        
                         <td>
                             <div class="userDatatable-content">
-                                {{$item->provider}}
+                                @if($item->lastSuccessfulLoginAt())
+                                {{$item->lastSuccessfulLoginAt()->format('d/m/Y H:i')}}
+                                @endif
+                            </div>
+                        </td>
+                        <td>
+                            <div class="userDatatable-content">
+                                @if($item->lastSuccessfulLoginIp())
+                                <span class="bg-opacity-warning  color-warning rounded-pill userDatatable-content-status active">
+                                {{$item->lastSuccessfulLoginIp()}}
+                                </span>
+                                @endif
                             </div>
                         </td>
                         <td class="text-center">
@@ -151,19 +161,11 @@
                         <td class="text-center">  
                             <div class="userDatatable-content d-inline-block">                          
                             @if ($item->enabled)
-                            <a href="{{route('users.change_status', $item->id)}}" class="bg-opacity-danger  color-danger rounded-pill userDatatable-content-status">disabled</a>
+                            <a href="{{route('users.change_status', $item->id)}}" class="bg-opacity-danger  color-danger rounded-pill userDatatable-content-status">disable</a>
                             @else
                             <a href="{{route('users.change_status', $item->id)}}" class="bg-opacity-warning  color-warning rounded-pill userDatatable-content-status">activate</a>
                             @endif
                             </div>
-                        </td>
-                        <td>
-                            <ul class="orderDatatable_actions mb-0 d-flex flex-wrap">
-                                <li>
-                                    <a href="#" class="view">
-                                        <span data-feather="eye"></span></a>
-                                </li>
-                            </ul>
                         </td>
                     </tr>
                     @endforeach

@@ -14,7 +14,7 @@ $(function() {
               "enabled": true
           },
       components: {
-          filtering: FooTable.MyFiltering
+          //filtering: FooTable.MyFiltering
       },
     }); 
   });

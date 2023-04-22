@@ -71,16 +71,16 @@
                                                 </button>
                                             </div>
                                             <p class="social-connector text-center mb-sm-25 mb-15  mt-sm-30 mt-20"><span>Or</span></p>
-                                            <div class="button-group d-flex align-items-center justify-content-md-start justify-content-center">
+                                            <div class="button-group d-flex align-items-center justify-content-center">
                                                 <ul class="signUp-socialBtn">
                                                     <li>
-                                                        <button class="btn text-dark px-30"><img class="svg" src="img/svg/google.svg" alt="img" /> </button>
+                                                        <button class="radius-md wh-48"><img class="svg" src="img/svg/google.svg" alt="img" /> </button>
                                                     </li>
                                                     <li>
-                                                        <button class=" radius-md wh-48 content-center"><img class="svg" src="img/svg/facebook.svg" alt="img" /></button>
+                                                        <button class="radius-md wh-48"><img class="svg" src="img/svg/facebook.svg" alt="img" /></button>
                                                     </li>
                                                     <li>
-                                                        <button class="radius-md wh-48 content-center"><img class="svg" src="img/svg/twitter.svg" alt="img" /></button>
+                                                        <button class="radius-md wh-48"><img class="svg" src="img/svg/twitter.svg" alt="img" /></button>
                                                     </li>
                                                 </ul>
                                             </div>

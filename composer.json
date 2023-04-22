@@ -6,16 +6,18 @@
     "license": "MIT",
     "require": {
         "php": "^8.0.2",
+        "ekmungai/eloquent-ifrs": "^5.0",
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^9.19",
         "laravel/sanctum": "^3.0",
         "laravel/socialite": "^5.6",
         "laravel/tinker": "^2.7",
         "laravel/ui": "^4.2",
-        "munafio/chatify": "^1.6"
+        "munafio/chatify": "^1.6",
+        "rappasoft/laravel-authentication-log": "^2.0",
+        "torann/geoip": "^3.0"
     },
     "require-dev": {
-        "barryvdh/laravel-debugbar": "^3.8",
         "fakerphp/faker": "^1.9.1",
         "laravel/pint": "^1.0",
         "laravel/sail": "^1.0.1",

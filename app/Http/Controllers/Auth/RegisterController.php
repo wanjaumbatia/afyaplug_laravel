@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\EmailMessage;
+use App\Models\SmsMessage;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -52,7 +54,6 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'phone'=>['required', 'string', 'max:20'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }
@@ -65,11 +66,28 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
-            'phone' => $data['phone'],
             'password' => Hash::make($data['password']),
         ]);
+        $sms = 'Dear '.$user->name.', You Afya Plug account has been created, check your mailbox for verification link.';
+        //send notifications
+        // $sms = SmsMessage::create([
+        //     'message' => $sms,
+        //     'phone' => $user->phone,
+        //     'user_id' => $user->id,
+        //     'reference' => 'USER_CREATION'
+        // ]);
+
+        $email = EmailMessage::create([
+            'to' => $user->email,
+            'subject' => 'Account Verification',
+            'message' => '',
+            'user_id' => $user->id,
+            'reference' => 'USER_CREATION'
+        ]);
+        
+        return $user;
     }
 }
