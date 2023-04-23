@@ -76,4 +76,9 @@ class User extends Authenticatable implements Recyclable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function routeNotificationForAfricasTalking($notification)
+    {
+        return $this->phone;
+    }
 }

@@ -344,6 +344,9 @@
                             </a>
                             <ul>
                                 <li>
+                                    <a class="" href="{{route('users.staff.pending')}}">Pending Requests</a>
+                                </li>
+                                <li>
                                     <a class="" href="{{route('users.staff.open')}}">Open Requests</a>
                                 </li>
                             </ul>

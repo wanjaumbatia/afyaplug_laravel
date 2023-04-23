@@ -37,4 +37,10 @@ return [
         'redirect' => 'http://example.com/callback-url',
     ],
 
+    'africastalking' => [
+        'username'      => env('AT_USERNAME'),
+        'key'           => env('AT_KEY'),
+        'from'          => env('AT_FROM'),
+    ]
+
 ];

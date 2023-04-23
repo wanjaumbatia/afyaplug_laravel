@@ -4,6 +4,8 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Validation\UnauthorizedException;
+use Spatie\FlareClient\Http\Exceptions\BadResponseCode;
 
 class CheckProfile
 {
@@ -16,6 +18,13 @@ class CheckProfile
      */
     public function handle(Request $request, Closure $next)
     {
+        if($request->user()->enabled = false){
+            //return new UnauthorizedException("Your account has been disabled, please contact administrator");
+        }
+
+        if($request->user()->enabled = false){
+            //return new UnauthorizedException("Your account has been disabled, please contact administrator");
+        }
         if ($request->user()->role) {
             if ($request->user()->role->name == "Staff") {
                 //check if profile is completed

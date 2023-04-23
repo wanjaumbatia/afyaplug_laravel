@@ -1622,9 +1622,33 @@
                 ) {
                 } else {
                     $("#3").addClass("completed");
+                    $("#4").addClass("current");
                     $("#3-span").html("");
                     $("#3-span").addClass("las la-check");
                     $("#specialization_form").hide();
+                    $("#education_form").show();
+
+                    if ($("#education_val").val() == "1") {
+                        $("#4").addClass("completed");
+                        $("#5").addClass("current");
+                        $("#4-span").html("");
+                        $("#4-span").addClass("las la-check");
+                        $("#education_form").hide();
+                        $("#experience_form").show();
+
+                        if ($("#experience_val").val() == "1") {
+                            $("#5").addClass("completed");
+                            $("#5-span").html("");
+                            $("#5-span").addClass("las la-check");
+                            $("#experience_form").hide();
+
+                            window.location.href = "/home";
+                        } else {                            
+                            //$("#completed_fom").hide();
+                        }
+                    } else {
+                        $("#experience_form").hide();
+                    }
                 }
             }
         }
@@ -1682,7 +1706,6 @@
                     date_of_birth: $("#date_of_birth").val(),
                     gender: $("#gender :selected").val(),
                 };
-                console.log(data);
                 fetch("/users/staff/update_profile", {
                     method: "POST",
                     credentials: "same-origin",
@@ -1718,7 +1741,6 @@
                     specialty: $("#specialty").val(),
                     nurse_license_number: $("#nurse_license_number").val(),
                 };
-                console.log(data);
                 fetch("/users/staff/update_profile", {
                     method: "POST",
                     credentials: "same-origin",
@@ -1738,6 +1760,121 @@
                     })
                     .catch((error) => console.error("Error: ", error));
             }
+        });
+
+        $("#save_education_btn").click(function (e) {
+            e.preventDefault();
+            if (
+                $("#school").val() == "" ||
+                $("#from").val() == "" ||
+                $("#to").val() == ""
+            ) {
+            } else {
+                var data = {
+                    school: $("#school").val(),
+                    to: $("#to").val(),
+                    from: $("#from").val(),
+                    user_id: $("#user_id").val(),
+                };
+                fetch("/users/staff/save_education", {
+                    method: "POST",
+                    credentials: "same-origin",
+                    headers: {
+                        "X-CSRF-Token": csrfToken,
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(data),
+                })
+                    .then(function (response) {
+                        return response.json();
+                    })
+                    .then(function (data) {
+                        if (data.success == true) {
+                            window.location.reload();
+                            staff_wizard();
+                        }
+                    })
+                    .catch((error) => console.error("Error: ", error));
+            }
+        });
+
+        $("#submit_education_btn").click(function (e) {
+            var url = "";
+            fetch("/users/staff/submit_education", {
+                method: "GET",
+                credentials: "same-origin",
+                headers: {
+                    "X-CSRF-Token": csrfToken,
+                    "Content-Type": "application/json",
+                },
+            })
+                .then(function (response) {
+                    return response.json();
+                })
+                .then(function (data) {
+                    if (data.success == true) {
+                        window.location.reload();
+                        staff_wizard();
+                    }
+                })
+                .catch((error) => console.error("Error: ", error));
+        });
+
+        $("#save_experience_btn").click(function (e) {
+            e.preventDefault();
+            if (
+                $("#company").val() == "" ||
+                $("#start").val() == "" ||
+                $("#end").val() == ""
+            ) {
+            } else {
+                var data = {
+                    company: $("#company").val(),
+                    to: $("#start").val(),
+                    from: $("#end").val(),
+                    user_id: $("#user_id").val(),
+                };
+                fetch("/users/staff/save_experience", {
+                    method: "POST",
+                    credentials: "same-origin",
+                    headers: {
+                        "X-CSRF-Token": csrfToken,
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(data),
+                })
+                    .then(function (response) {
+                        return response.json();
+                    })
+                    .then(function (data) {
+                        if (data.success == true) {
+                            window.location.reload();
+                            staff_wizard();
+                        }
+                    })
+                    .catch((error) => console.error("Error: ", error));
+            }
+        });
+
+        $("#submit_experience_btn").click(function (e) {
+            var url = "";
+            fetch("/users/staff/submit_experience", {
+                method: "GET",
+                credentials: "same-origin",
+                headers: {
+                    "X-CSRF-Token": csrfToken,
+                    "Content-Type": "application/json",
+                },
+            })
+                .then(function (response) {
+                    return response.json();
+                })
+                .then(function (data) {
+                    if (data.success == true) {
+                        window.location.href = "/home";
+                    }
+                })
+                .catch((error) => console.error("Error: ", error));
         });
     });
 

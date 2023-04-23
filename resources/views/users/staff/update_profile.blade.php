@@ -10,8 +10,8 @@
         </div>
     </div>
 </div>
-<div class="container-fluid">
-    <div class=" checkout wizard8 global-shadow border px-sm-50 px-20 mb-30 bg-white radius-xl w-100">
+<div class="container-fluid d-flex justify-content-center">
+    <div class=" checkout wizard8 global-shadow border px-sm-50 px-20 my-30 bg-white radius-xl w-80">
         <div class="row justify-content-center">
             <div class="col-xl-8">
                 <div class="row justify-content-center">
@@ -26,6 +26,12 @@
                                 </div>
                                 <div class="step" id="3">
                                     <span id="3-span">3</span>
+                                </div>
+                                <div class="step" id="4">
+                                    <span id="4-span">4</span>
+                                </div>
+                                <div class="step" id="5">
+                                    <span id="5-span">5</span>
                                 </div>
                             </div>
                             <div class="card-header border-bottom-0">
@@ -118,16 +124,16 @@
                                         <form>
                                             <div class="form-group">
                                                 <label for="id_number">Title</label>
-                                                <input type="text" class="form-control" id="title" name="title">
+                                                <input type="text" value="{{$profile->title}}" class="form-control" id="title" name="title">
                                             </div>
                                             <div class="form-group">
                                                 <label for="date_of_birth">Specialty</label>
-                                                <input type="text"   class="form-control" id="specialty" name="specialty">
+                                                <input type="text" value="{{$profile->specialty}}"  class="form-control" id="specialty" name="specialty">
                                                                 
                                             </div>
                                             <div class="form-group">
                                                 <label for="gender">nurse regestration number</label>
-                                                <input type="text"  class="form-control" id="nurse_license_number" name="nurse_license_number">
+                                                <input type="text" value="{{$profile->nurse_license_number}}" class="form-control" id="nurse_license_number" name="nurse_license_number">
                                             </div>
                                             <div class="button-group d-flex pt-3 mb-20 justify-content-end flex-wrap">
                                                 <button id="save_specialization_btn" class="btn text-white btn-primary btn-default btn-squared text-capitalize m-1">Save
@@ -137,6 +143,121 @@
                                     </div>
                                 </div>
                             </div>
+                            
+                            <div id="education_form">
+                                <div class="card-header border-bottom-0 pb-sm-0 pb-1 px-0">
+                                    <h4 class="fw-500">4. Education Background</h4>
+                                </div>
+                                <input hidden id="education_val" value="{{$profile->filled_education}}">
+                                <input hidden id="experience_val" value="{{$profile->filled_experience}}">
+                                <div class="card-body p-0">
+                                    <div class="edit-profile__body">
+                                        <form>
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <label for="id_number">School</label>
+                                                        <input type="text" class="form-control" id="school" name="school">
+                                                    </div>
+                                                </div>
+                                           <div class="col-6">
+                                            <div class="form-group">
+                                                <label for="date_of_birth">From</label>
+                                                <input type="text"   class="form-control" id="from" name="from">                                                                
+                                            </div>
+                                           </div>
+                                           <div class="col-6">
+                                            <div class="form-group">
+                                                <label for="gender">To</label>
+                                                <input type="text"  class="form-control" id="to" name="to">
+                                            </div>
+                                           </div>                                           
+                                            </div>
+                                            <div class="button-group d-flex mb-20 justify-content-end flex-wrap">
+                                                <button id="save_education_btn" class="btn text-white btn-primary btn-default btn-squared text-capitalize ">
+                                                    <i class="mr-10 mr-0 las la-plus"></i>
+                                                    Add
+                                                </button>
+                                            </div>
+                                            <div class="list-box">
+                                                <ul>
+                                                    @foreach ($education as $item)
+                                                    <li class="list-box__item d-flex justify-content-between">
+                                                        <p>{{$item->school}}</p>
+                                                        <p>{{$item->year_start}} - {{$item->year_end}}</p>
+                                                    </li>
+                                                    @endforeach                                                    
+                                                </ul>
+                                            </div>
+                                        </form>
+                                        @if (count($education)>0)
+                                            <div class="button-group d-flex mt-10 mb-20 justify-content-end flex-wrap">
+                                                <button id="submit_education_btn" class="btn text-white btn-primary btn-default btn-squared text-capitalize ">                                                    
+                                                    Submit
+                                                    <i class="ml-10 mr-0 las la-arrow-right"></i>
+                                                </button>
+                                            </div>                                                
+                                            @endif
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="experience_form">
+                                <div class="card-header border-bottom-0 pb-sm-0 pb-1 px-0">
+                                    <h4 class="fw-500">5. Work Experience</h4>
+                                </div>
+                                <input hidden id="education_val" value="{{$profile->filled_education}}">
+                                <div class="card-body p-0">
+                                    <div class="edit-profile__body">
+                                        <form>
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <label for="id_number">Company</label>
+                                                        <input type="text" class="form-control" id="company" name="company">
+                                                    </div>
+                                                </div>
+                                           <div class="col-6">
+                                            <div class="form-group">
+                                                <label for="date_of_birth">From</label>
+                                                <input type="text"   class="form-control" id="start" name="start">                                                                
+                                            </div>
+                                           </div>
+                                           <div class="col-6">
+                                            <div class="form-group">
+                                                <label for="gender">To</label>
+                                                <input type="text"  class="form-control" id="end" name="end">
+                                            </div>
+                                           </div>                                           
+                                            </div>
+                                            <div class="button-group d-flex mb-20 justify-content-end flex-wrap">
+                                                <button id="save_experience_btn" class="btn text-white btn-primary btn-default btn-squared text-capitalize ">
+                                                    <i class="mr-10 mr-0 las la-plus"></i>
+                                                    Add
+                                                </button>
+                                            </div>
+                                            <div class="list-box">
+                                                <ul>
+                                                    @foreach ($experience as $item)
+                                                    <li class="list-box__item d-flex justify-content-between">
+                                                        <p>{{$item->company}}</p>
+                                                        <p>{{$item->year_start}} - {{$item->year_end}}</p>
+                                                    </li>
+                                                    @endforeach                                                    
+                                                </ul>
+                                            </div>
+                                        </form>
+                                        @if (count($experience)>0)
+                                        <div class="button-group d-flex mt-10 mb-20 justify-content-end flex-wrap">
+                                            <button id="submit_experience_btn" class="btn text-white btn-primary btn-default btn-squared text-capitalize ">                                                    
+                                                Submit
+                                                <i class="ml-10 mr-0 las la-arrow-right"></i>
+                                            </button>
+                                        </div>                             
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                            
                         </div><!-- ends: .card -->
                     </div><!-- ends: col -->
                 </div>

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Education;
 use App\Models\EmailMessage;
+use App\Models\Experience;
 use App\Models\Role;
 use App\Models\SmsMessage;
 use App\Models\StaffProfile;
@@ -73,16 +75,20 @@ class UsersController extends Controller
         return view('users.profile', ['user' => $loggedInUser]);
     }
 
-    public function open_list()
-    {
-        $staff = StaffProfile::where('employment_status', 'Open')->get();
-        return view('users.staff.open', ['staff' => $staff]);
-    }
-
     public function update_staff_profile()
     {
         $profile = StaffProfile::where('user_id',  auth()->user()->id)->first();
-        return view('users.staff.update_profile', ['profile' => $profile, 'user' => auth()->user()]);
+        $education = Education::where('staff_profile_id', $profile->id)->get();
+        $experience = Experience::where('staff_profile_id', $profile->id)->get();
+        return view(
+            'users.staff.update_profile',
+            [
+                'education' => $education,
+                'profile' => $profile,
+                'user' => auth()->user(),
+                'experience' => $experience
+            ]
+        );
     }
 
     public function update_staff_profile_details(Request $request)
@@ -98,6 +104,52 @@ class UsersController extends Controller
         }
     }
 
+    public function save_education(Request $request)
+    {
+        if (auth()->user()->id == $request->user_id) {
+            $profile = StaffProfile::where('user_id', $request->user_id)->first();
+            Education::create([
+                'school' => $request->school,
+                'year_start' => $request->from,
+                'year_end' => $request->to,
+                'staff_profile_id' => $profile->id
+            ]);
+            return response()->json(['success' => true]);
+        } else {
+            return response()->json(['success' => false]);
+        }
+    }
+
+    public function save_experience(Request $request)
+    {
+        if (auth()->user()->id == $request->user_id) {
+            $profile = StaffProfile::where('user_id', $request->user_id)->first();
+            Experience::create([
+                'company' => $request->company,
+                'year_start' => $request->from,
+                'year_end' => $request->to,
+                'staff_profile_id' => $profile->id
+            ]);
+            return response()->json(['success' => true]);
+        } else {
+            return response()->json(['success' => false]);
+        }
+    }
+
+    public function submit_education(){        
+        $profile = StaffProfile::where('user_id', auth()->user()->id)->update([
+            'filled_education'=>true
+        ]);        
+        return response()->json(['success' => true]);
+    }
+
+    public function submit_experience(){        
+        $profile = StaffProfile::where('user_id', auth()->user()->id)->update([
+            'filled_experience'=>true,
+            'employment_status'=>'Pending'
+        ]);        
+        return response()->json(['success' => true]);
+    }
 
     public function markNotification($id)
     {
@@ -107,5 +159,10 @@ class UsersController extends Controller
             })->markAsRead();
 
         return redirect()->back();
+    }
+
+    public function makeApplication(){
+        $id = auth()->user()->id;
+        dd($id);
     }
 }

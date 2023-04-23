@@ -5,6 +5,7 @@ use App\Http\Controllers\CompanyProfileController;
 use App\Http\Controllers\NotificationsController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\RolesController;
+use App\Http\Controllers\StaffController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsersController;
 
@@ -23,7 +24,10 @@ Route::middleware(['check.profile'])->group(function () {
         Route::get('/change_status/{id}', [UsersController::class, 'change_status'])->name('users.change_status');
 
         Route::get('/profile', [UsersController::class, 'profile'])->name('users.profile');
-        Route::get('/staff/open', [UsersController::class, 'open_list'])->name('users.staff.open');
+        Route::get('/staff/open', [StaffController::class, 'open_list'])->name('users.staff.open');
+        Route::get('/staff/pending', [StaffController::class, 'pending_list'])->name('users.staff.pending');
+        Route::get('/staff/pending_profile/{id}', [StaffController::class, 'pending_profile'])->name('users.staff.pending_profile');
+        
     });
 
     Route::prefix('settings')->middleware(['auth'])->group(function () {
@@ -73,5 +77,10 @@ Route::middleware(['check.profile'])->group(function () {
 
 Route::get('/users/staff/update_profile', [UsersController::class, 'update_staff_profile'])->name('users.staff.update_staff_profile');
 Route::post('/users/staff/update_profile', [UsersController::class, 'update_staff_profile_details'])->name('users.staff.update_staff_profile_details');
+Route::post('/users/staff/save_education', [UsersController::class, 'save_education'])->name('users.staff.save_education');
+Route::get('/users/staff/submit_education', [UsersController::class, 'submit_education'])->name('users.staff.submit_education');
+Route::post('/users/staff/save_experience', [UsersController::class, 'save_experience'])->name('users.staff.save_experience');
+Route::get('/users/staff/submit_experience', [UsersController::class, 'submit_experience'])->name('users.staff.submit_experience');
     
+
 Auth::routes();

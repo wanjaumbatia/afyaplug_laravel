@@ -30,6 +30,8 @@ class StaffProfile extends Model
         'pay_rate',
         'criminal_background_check',
         'user_id',
+        'filled_education',
+        'filled_experience'
     ];
 
     public function user(): BelongsTo

@@ -34,6 +34,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->boolean('filled_education')->default(false);
+            $table->boolean('filled_experience')->default(false);            
             $table->decimal('pay_rate')->nullable();
             //language
             $table->boolean('criminal_background_check')->default(false);
