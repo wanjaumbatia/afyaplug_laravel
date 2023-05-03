@@ -18,17 +18,10 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('phone')->unique()->nullable();
-            $table->string('provider')->default('Local');
-            $table->string('provider_id')->unique()->nullable();
             $table->boolean('enabled')->default(true);
-            $table->boolean('locked')->default(false);
-            $table->unsignedBigInteger('role_id')->nullable();
-            $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->nullable();
-            $table->string('bio')->nullable();
-            $table->boolean('deleted')->default(false);
-            
+            $table->string('odoo_token')->nullable();
             $table->softDeletes();
             $table->rememberToken();
             $table->timestamps();

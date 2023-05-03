@@ -12,8 +12,8 @@
                     </div><!-- End: .signUP-overlay  -->
                     <div class="signUP-admin-left__content">
                         <div class="text-capitalize mb-md-30 mb-15 d-flex align-items-center justify-content-md-start justify-content-center">
-                            <a class="wh-36 bg-primary text-white radius-md mr-10 content-center" href="index.html">a</a>
-                            <span class="text-dark">Afya Plug</span>
+                            <img width="55px" src="img/top_logo.png" alt="" srcset="">
+                           <span class="text-dark">Afya Plug</span>
                         </div>
                         <h1>Convenience in Health Care</h1>
                     </div><!-- End: .signUP-admin-left__content  -->

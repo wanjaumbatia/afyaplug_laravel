@@ -51,8 +51,6 @@
 <body class="layout-light side-menu overlayScroll">
     <div class="mobile-search">
         <form class="search-form">
-            <span data-feather="search"></span>
-            <input class="form-control mr-sm-2 box-shadow-none" type="text" placeholder="Search...">
         </form>
     </div>
 
@@ -84,89 +82,18 @@
                     </li>
                     <li class="nav-message">
                         <div class="dropdown-custom">
+                            <a href="/chatify" class="nav-item-toggle">
+                                <span data-feather="message-square"></span></a>
+                          
+                        </div>
+                    </li>
+                    <li class="nav-message">
+                        <div class="dropdown-custom">
                             <a href="javascript:;" class="nav-item-toggle">
                                 <span data-feather="mail"></span></a>
                             <div class="dropdown-wrapper">
-                                <h2 class="dropdown-wrapper__title">Messages <span class="badge-circle badge-success ml-1">2</span></h2>
+                                <h2 class="dropdown-wrapper__title">Messages <span class="badge-circle badge-success ml-1">0</span></h2>
                                 <ul>
-                                    <li class="author-online has-new-message">
-                                        <div class="user-avater">
-                                            <img src="img/team-1.png" alt="">
-                                        </div>
-                                        <div class="user-message">
-                                            <p>
-                                                <a href="" class="subject stretched-link text-truncate" style="max-width: 180px;">Web Design</a>
-                                                <span class="time-posted">3 hrs ago</span>
-                                            </p>
-                                            <p>
-                                                <span class="desc text-truncate" style="max-width: 215px;">Lorem ipsum
-                                                    dolor amet cosec Lorem ipsum</span>
-                                                <span class="msg-count badge-circle badge-success badge-sm">1</span>
-                                            </p>
-                                        </div>
-                                    </li>
-                                    <li class="author-offline has-new-message">
-                                        <div class="user-avater">
-                                            <img src="img/team-1.png" alt="">
-                                        </div>
-                                        <div class="user-message">
-                                            <p>
-                                                <a href="" class="subject stretched-link text-truncate" style="max-width: 180px;">Web Design</a>
-                                                <span class="time-posted">3 hrs ago</span>
-                                            </p>
-                                            <p>
-                                                <span class="desc text-truncate" style="max-width: 215px;">Lorem ipsum
-                                                    dolor amet cosec Lorem ipsum</span>
-                                                <span class="msg-count badge-circle badge-success badge-sm">1</span>
-                                            </p>
-                                        </div>
-                                    </li>
-                                    <li class="author-online has-new-message">
-                                        <div class="user-avater">
-                                            <img src="img/team-1.png" alt="">
-                                        </div>
-                                        <div class="user-message">
-                                            <p>
-                                                <a href="" class="subject stretched-link text-truncate" style="max-width: 180px;">Web Design</a>
-                                                <span class="time-posted">3 hrs ago</span>
-                                            </p>
-                                            <p>
-                                                <span class="desc text-truncate" style="max-width: 215px;">Lorem ipsum
-                                                    dolor amet cosec Lorem ipsum</span>
-                                                <span class="msg-count badge-circle badge-success badge-sm">1</span>
-                                            </p>
-                                        </div>
-                                    </li>
-                                    <li class="author-offline">
-                                        <div class="user-avater">
-                                            <img src="img/team-1.png" alt="">
-                                        </div>
-                                        <div class="user-message">
-                                            <p>
-                                                <a href="" class="subject stretched-link text-truncate" style="max-width: 180px;">Web Design</a>
-                                                <span class="time-posted">3 hrs ago</span>
-                                            </p>
-                                            <p>
-                                                <span class="desc text-truncate" style="max-width: 215px;">Lorem ipsum
-                                                    dolor amet cosec Lorem ipsum</span>
-                                            </p>
-                                        </div>
-                                    </li>
-                                    <li class="author-offline">
-                                        <div class="user-avater">
-                                            <img src="img/team-1.png" alt="">
-                                        </div>
-                                        <div class="user-message">
-                                            <p>
-                                                <a href="" class="subject stretched-link text-truncate" style="max-width: 180px;">Web Design</a>
-                                                <span class="time-posted">3 hrs ago</span>
-                                            </p>
-                                            <p>
-                                                <span class="desc text-truncate" style="max-width: 215px;">Lorem ipsum
-                                                    dolor amet cosec Lorem ipsum</span>
-                                            </p>
-                                        </div>
-                                    </li>
                                 </ul>
                                 <a href="" class="dropdown-wrapper__more">See All Message</a>
                             </div>
@@ -178,26 +105,9 @@
                             <a href="javascript:;" class="nav-item-toggle">
                                 <span data-feather="bell"></span></a>
                             <div class="dropdown-wrapper">
-                                <h2 class="dropdown-wrapper__title">Notifications <span class="badge-circle badge-warning ml-1">{{count(Auth::user()->unreadNotifications)}}</span></h2>
+                                <h2 class="dropdown-wrapper__title">Notifications <span class="badge-circle badge-warning ml-1">0</span></h2>
                                 <ul>
-                                    @foreach(Auth::user()->unreadNotifications as $item)
-                                    @if ($item->data['type'] == 'new_user')
-                                    <li class="nav-notification__single nav-notification__single--unread d-flex flex-wrap">
-                                        <div class="nav-notification__type nav-notification__type--primary">
-                                            <span data-feather="{{$item->data['icon']}}"></span>
-                                        </div>
-                                        <div class="nav-notification__details">
-                                            <a href="{{route('users.markNotification', $item->id)}}">
-                                                <a href="{{route('users.markNotification', $item->id)}}" class="subject stretched-link text-truncate" style="max-width: 180px;">{{$item->data['name']}}</a>
-                                                <span>has created an account.</span>
-                                            </a>
-                                            <p>
-                                                <span class="time-posted">{{$item->created_at}}</span>
-                                            </p>
-                                        </div>
-                                    </li>
-                                    @endif
-                                    @endforeach
+                                   
                                 </ul>
                             </div>
                         </div>
@@ -213,31 +123,15 @@
                                     </div>
                                     <div>
                                         <h6>{{ Auth::user()->name }}</h6>
-                                        <span class=" mt-1 bg-opacity-success  color-success rounded-pill userDatatable-content-status active">Administrator</span>
+                                        <span class=" mt-1 bg-opacity-success  color-success rounded-pill userDatatable-content-status active">Customer</span>
                                     </div>
                                 </div>
                                 <div class="nav-author__options">
                                     <ul>
                                         <li>
-                                            <a href="{{route('users.profile')}}">
+                                            <a href="#">
                                                 <span data-feather="user"></span> Profile</a>
-                                        </li>
-                                        <li>
-                                            <a href="">
-                                                <span data-feather="settings"></span> Settings</a>
-                                        </li>
-                                        <li>
-                                            <a href="">
-                                                <span data-feather="key"></span> Billing</a>
-                                        </li>
-                                        <li>
-                                            <a href="">
-                                                <span data-feather="users"></span> Activity</a>
-                                        </li>
-                                        <li>
-                                            <a href="">
-                                                <span data-feather="bell"></span> Help</a>
-                                        </li>
+                                        </li>                                      
                                     </ul>
                                     <a href="" class="nav-author__signout" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
@@ -270,116 +164,30 @@
         <aside class="sidebar-wrapper">
             <div class="sidebar sidebar-collapse" id="sidebar">
                 <div class="sidebar__menu-group">
-                    <ul class="sidebar_nav">
-                        <li class="menu-title">
-                            <span>Main menu</span>
-                        </li>
+                    <ul class="sidebar_nav">                        
                         <li>
-                            <a href="{{route('users.profile')}}" class="">
-                                <span data-feather="user" class="nav-icon"></span>
-                                <span class="menu-text">My Profile</span>
+                            <a href="/" class="">
+                                <span data-feather="home" class="nav-icon"></span>
+                                <span class="menu-text">Home</span>
                             </a>
                         </li>
                         <li>
                             <a href="/chatify" class="">
                                 <span data-feather="message-square" class="nav-icon"></span>
-                                <span class="menu-text">Chat</span>
+                                <span class="menu-text">Chatbox</span>
                             </a>
                         </li>
-                        <li class="has-child">
-                            <a href="#">
+                        <li>
+                            <a href="#" class="">
+                                <span data-feather="calendar" class="nav-icon"></span>
+                                <span class="menu-text">My Appointments</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="">
                                 <span data-feather="dollar-sign" class="nav-icon"></span>
-                                <span class="menu-text">Accounting</span>
-                                <span class="toggle-icon"></span>
+                                <span class="menu-text">Payment History</span>
                             </a>
-                            <ul>
-                                <li>
-                                    <a href="">Bank Accounts</a>
-                                </li>
-                                <li>
-                                    <a class="" href="{{route('accounting.accounts')}}">Accounts (COA)</a>
-                                </li>                        
-                                <li class="has-child">
-                                    <a href="#">
-                                        <span class="menu-text">Setup</span>
-                                        <span class="toggle-icon"></span>
-                                    </a>
-                                    <ul>        
-                                        <li>
-                                            <a class="" href="{{route('accounting.settings.currency')}}">Currencies</a>
-                                        </li>
-                                        <li>
-                                            <a class="" href="{{route('accounting.settings.vat')}}">VAT Rates</a>
-                                        </li>
-                                        <li class="">
-                                            <a class="" href="{{route('accounting.settings.period')}}">Accounting Periods</a>
-                                        </li>    
-                                        <li>
-                                            <a class="" href="{{route('accounting.settings.categories')}}">Account Categories</a>
-                                        </li>                            
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="has-child">
-                            <a href="#" class="">
-                                <span data-feather="bell" class="nav-icon"></span>
-                                <span class="menu-text">Notifications</span>
-                                <span class="toggle-icon"></span>
-                            </a>
-                            <ul>
-                                <li>
-                                    <a class="" href="{{route('notifications.sms')}}">SMS Messages</a>
-                                </li>
-                                <li>
-                                    <a class="" href="{{route('notifications.emails')}}">Email Messages</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="has-child">
-                            <a href="#" class="">
-                                <span data-feather="users" class="nav-icon"></span>
-                                <span class="menu-text">Staff Management</span>
-                                <span class="toggle-icon"></span>
-                            </a>
-                            <ul>
-                                <li>
-                                    <a class="" href="{{route('users.staff.pending')}}">Pending Requests</a>
-                                </li>
-                                <li>
-                                    <a class="" href="{{route('users.staff.open')}}">Open Requests</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="has-child">
-                            <a href="#" class="">
-                                <span data-feather="lock" class="nav-icon"></span>
-                                <span class="menu-text">Identity Management</span>
-                                <span class="toggle-icon"></span>
-                            </a>
-                            <ul>
-                                <li>
-                                    <a class="" href="{{route('users.index')}}">Users</a>
-                                </li>
-                                <li>
-                                    <a class="" href="{{route('roles.index')}}">Roles</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="has-child">
-                            <a href="#" class="">
-                                <span data-feather="settings" class="nav-icon"></span>
-                                <span class="menu-text">Settings</span>
-                                <span class="toggle-icon"></span>
-                            </a>
-                            <ul>
-                                <li>
-                                    <a class="" href="{{route('company.profile')}}">Company Details</a>
-                                </li>
-                                <li>
-                                    <a class="" href="{{route('products.index')}}">Products</a>
-                                </li>
-                            </ul>
                         </li>
                     </ul>
                 </div>

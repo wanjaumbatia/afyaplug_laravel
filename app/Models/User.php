@@ -20,7 +20,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 class User extends Authenticatable implements Recyclable 
 {
     
-    use HasApiTokens, HasFactory, Notifiable, AuthenticationLoggable, IFRSUser, Recycling, SoftDeletes;
+    use HasApiTokens, HasFactory, Notifiable, AuthenticationLoggable, Recycling, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -33,35 +33,10 @@ class User extends Authenticatable implements Recyclable
         'password',
         'phone',
         'enabled',
-        'locked',
-        'provider_id',
-        'provider',
-        'enabled',
-        'created_at',
-        'role_id',
-        'bio'
+        'odoo_token',
+        'created_at'
     ];
 
-    public function role(): BelongsTo
-    {
-        return $this->belongsTo(Role::class);
-    }
-
-
-    public function staff_profile(): HasOne
-    {
-        return $this->hasOne(StaffProfile::class);
-    }
-
-    public function sms(): HasMany
-    {
-        return $this->hasMany(SmsMessage::class);
-    }
-
-    public function emails(): HasMany
-    {
-        return $this->hasMany(EmailMessage::class);
-    }
 
     protected $hidden = [
         'password',
@@ -77,8 +52,4 @@ class User extends Authenticatable implements Recyclable
         'email_verified_at' => 'datetime',
     ];
 
-    public function routeNotificationForAfricasTalking($notification)
-    {
-        return $this->phone;
-    }
 }

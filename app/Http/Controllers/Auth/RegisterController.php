@@ -3,13 +3,13 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\EmailMessage;
-use App\Models\SmsMessage;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 
 class RegisterController extends Controller
 {
@@ -66,28 +66,36 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $user = User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
-        $sms = 'Dear '.$user->name.', You Afya Plug account has been created, check your mailbox for verification link.';
-        //send notifications
-        // $sms = SmsMessage::create([
-        //     'message' => $sms,
-        //     'phone' => $user->phone,
-        //     'user_id' => $user->id,
-        //     'reference' => 'USER_CREATION'
-        // ]);
 
-        $email = EmailMessage::create([
-            'to' => $user->email,
-            'subject' => 'Account Verification',
-            'message' => '',
-            'user_id' => $user->id,
-            'reference' => 'USER_CREATION'
-        ]);
-        
+        //create user in odoo
+        $url = env('ODOO_URL', '');
+
+        // $response = Http::get($url)->json();
+        // User::where('id', auth()->user()->id)->update([
+        //     'odoo_token'=>$response['access_token']
+        // ]);
+        // $response = Http::post($url . 'register', [
+        //     "name" => $data['name'],
+        //     "username" => $data['email'],
+        //     "email" => $data['email'],
+        //     "password" => $data['password'],
+        //     "phone" => "0712345678",
+        //     "db" => env('ODOO_DB', 'afyaplug')
+        // ])->json();
+
+        // $result = $response['result'];
+        // if ($result['success'] == true) {
+        //     Log::info($result);
+        //     Log::warning($result['token']);
+            $user = User::create([
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'password' => Hash::make($data['password']),
+                'odoo_token' => ""
+            ]);
+        //}
+
+
         return $user;
     }
 }

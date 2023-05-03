@@ -11,7 +11,7 @@
                     </div>
                     <div class="signUP-admin-left__content">
                         <div class="text-capitalize mb-md-30 mb-5 d-flex align-items-center justify-content-md-start justify-content-center">
-                            <a class="wh-36 bg-primary text-white radius-md mr-10 content-center" href="index.html">a</a>
+                            <img width="55px" src="img/top_logo.png" alt="" srcset="">
                             <span class="text-dark">Afya Plug</span>
                         </div>
                         <h1>Convenience In Health Care</h1>
